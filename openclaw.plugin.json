@@ -1,0 +1,28 @@
+{
+  "id": "scavio",
+  "name": "Scavio",
+  "description": "Structured web data for OpenClaw agents across 31 platforms with one API key: search, page extraction, and first-party commerce, social, travel, jobs, real-estate, app-store, software-review, ad-library and company-filing data.",
+  "icon": "https://scavio.dev/icon.svg",
+  "configSchema": {
+    "type": "object",
+    "required": [
+      "apiKey"
+    ],
+    "properties": {
+      "apiKey": {
+        "type": "string",
+        "title": "Scavio API key",
+        "description": "Your Scavio API key from https://scavio.dev. Format: sk_ followed by 64 hex characters.",
+        "pattern": "^sk_[0-9a-f]{64}$",
+        "writeOnly": true
+      },
+      "platforms": {
+        "type": "string",
+        "title": "Platform allowlist",
+        "description": "Which Scavio platforms register tools. Unset registers the default surface: 106 tools across 11 platforms. Additive, e.g. 'default,zillow,sec'. 'all' registers 191 tools - a large payload in every session.",
+        "default": "default"
+      }
+    },
+    "additionalProperties": false
+  }
+}

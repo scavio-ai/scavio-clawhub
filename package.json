@@ -1,0 +1,26 @@
+{
+  "name": "@scavio-ai/scavio-clawhub",
+  "version": "1.0.0",
+  "description": "Structured web data for OpenClaw agents across 31 platforms with one API key - search, extraction, commerce, social, travel, jobs, real-estate, app stores, software reviews, ad libraries and company filings.",
+  "license": "MIT",
+  "homepage": "https://scavio.dev",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scavio-ai/scavio-clawhub.git"
+  },
+  "keywords": [
+    "openclaw",
+    "clawhub",
+    "mcp",
+    "web-search",
+    "web-scraping",
+    "structured-data"
+  ],
+  "files": [
+    "openclaw.plugin.json",
+    "skills",
+    "logo.png",
+    "README.md",
+    "LICENSE"
+  ]
+}
