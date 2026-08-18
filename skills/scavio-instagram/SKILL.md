@@ -55,7 +55,7 @@ Do not invent friendlier field names when reporting results, and do not claim a 
 
 ## Setup
 
-Get a free API key at https://scavio.dev/?utm_source=clawhub&utm_medium=skill&utm_campaign=scavio-instagram (50 one-time credits to get started, no card required):
+Get a free API key at [scavio.dev](https://scavio.dev/?utm_source=clawhub&utm_medium=skill&utm_campaign=scavio-instagram) (50 one-time credits to get started, no card required):
 
 ```bash
 export SCAVIO_API_KEY=sk_live_your_key

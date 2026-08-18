@@ -41,7 +41,7 @@ Each page is **1 credit**, so a deep crawl is real but the cost scales with dept
 
 ## Setup
 
-Get a free API key at https://scavio.dev/?utm_source=clawhub&utm_medium=skill&utm_campaign=scavio-meta-ads (50 free credits to get started, no card required):
+Get a free API key at [scavio.dev](https://scavio.dev/?utm_source=clawhub&utm_medium=skill&utm_campaign=scavio-meta-ads) (50 free credits to get started, no card required):
 
 ```bash
 export SCAVIO_API_KEY=sk_live_your_key

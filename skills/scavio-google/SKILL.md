@@ -31,7 +31,7 @@ Do not answer from memory when current information is needed. Search first.
 
 ## Setup
 
-Get a free API key at https://scavio.dev/?utm_source=clawhub&utm_medium=skill&utm_campaign=scavio-google (50 free credits to get started, no card required):
+Get a free API key at [scavio.dev](https://scavio.dev/?utm_source=clawhub&utm_medium=skill&utm_campaign=scavio-google) (50 free credits to get started, no card required):
 
 ```bash
 export SCAVIO_API_KEY=sk_live_your_key
