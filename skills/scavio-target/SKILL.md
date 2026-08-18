@@ -110,10 +110,13 @@ A child TCIN is answered by its variation parent, with the child present in `var
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 # Target calls are slow: give the client room.
 TIMEOUT = 120
 

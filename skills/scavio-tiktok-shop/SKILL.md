@@ -227,10 +227,13 @@ curl -s -X POST https://api.scavio.dev/api/v1/tiktok-shop/resolve \
 Chaining it, with the 404 handled the way it should be:
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 def call(path, body):
     return requests.post(f"{BASE}/api/v1/tiktok-shop/{path}", headers=HEADERS, json=body)

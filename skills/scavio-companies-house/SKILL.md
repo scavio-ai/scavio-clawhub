@@ -116,10 +116,13 @@ So on officers and filings, an empty page is the stop signal - and it is **indis
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Find the company number - matches former names too
 hits = requests.post(f"{BASE}/api/v1/companieshouse/search", headers=HEADERS,
@@ -192,7 +195,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 `langchain-scavio` has no Companies House tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -209,7 +212,7 @@ filings = client.companies_house.filing_history("09446231", page=1)
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

@@ -67,11 +67,15 @@ Every request costs 1 credit.
 ## Example
 
 ```python
-import os, requests
+import requests
+
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
 
 response = requests.post(
     "https://api.scavio.dev/api/v2/google/ai-mode",
-    headers={"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"},
+    headers={"Authorization": f"Bearer {API_KEY}"},
     json={"query": "best running shoes for flat feet 2026", "gl": "us", "hl": "en"},
 )
 data = response.json()

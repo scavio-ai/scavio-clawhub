@@ -128,10 +128,13 @@ Rules the endpoint enforces:
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. For-sale search by region URL. A city NAME would not work here.
 listings = requests.post(f"{BASE}/api/v1/redfin/search", headers=HEADERS,
@@ -198,7 +201,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 `langchain-scavio` has no Redfin tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -215,7 +218,7 @@ market = client.redfin.market(region_id=30749, region_type=6)
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

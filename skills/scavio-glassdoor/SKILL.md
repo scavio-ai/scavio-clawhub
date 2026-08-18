@@ -69,7 +69,7 @@ Base URL: `https://api.scavio.dev`. Every Glassdoor endpoint costs **1 credit**.
 
 ### Pagination
 
-- **`/reviews` has no `page` parameter and never will.** Glassdoor's login wall caps the response at **three reviews**. Move the window with `category` and `employment_status`, and read `filtered_review_count` to see how many reviews match the current filter (against `total_review_count` for the employer overall). Do not build a paging loop here and do not tell the user you can retrieve all reviews.
+- **`/reviews` has no `page` parameter and never will.** Glassdoor's login wall caps the response at **three reviews**. Move the window with `category` and `employment_status`, and read `filtered_review_count` to see how many reviews match the current filter (against `total_review_count` for the employer overall). Do not build a paging loop here and never claim you can retrieve all reviews.
 - **`/salaries`** pages with a 1-based `page` at **10 job titles per page**; `page_count` on the response says how many pages exist.
 - **`/companies`** and **`/company`** return a single response and take no paging parameter.
 
@@ -115,10 +115,13 @@ Base URL: `https://api.scavio.dev`. Every Glassdoor endpoint costs **1 credit**.
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 TIMEOUT = 180          # Glassdoor is slow - do not use a short client timeout
 
 # 1. ALWAYS START HERE - a name is not an employer id
@@ -213,7 +216,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -230,7 +233,7 @@ salaries = client.glassdoor.salaries(url=company["salaries_url"], page=1)
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

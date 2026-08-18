@@ -107,10 +107,13 @@ On `/search`, `lang` is independent of `country`: the storefront sets the prices
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search - one call, up to 200 complete app rows. No pagination: raise limit.
 apps = requests.post(f"{BASE}/api/v1/appstore/search", headers=HEADERS,
@@ -186,7 +189,7 @@ Two shapes to code for:
 `langchain-scavio` has no App Store tool - use the Scavio SDK directly (it handles the auth header):
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -202,7 +205,7 @@ reviews = client.app_store.reviews("1232780281", page=1, sort="most_helpful")
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

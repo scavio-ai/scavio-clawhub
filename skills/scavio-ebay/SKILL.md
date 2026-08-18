@@ -100,10 +100,13 @@ Base URL: `https://api.scavio.dev`. Every endpoint costs **1 credit**.
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. What did it actually sell for? (the price-research call)
 sold = requests.post(f"{BASE}/api/v1/ebay/search", headers=HEADERS,
@@ -143,7 +146,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 - `per_page` accepts only `60`, `120` or `240`. eBay silently falls back to 60 for any other value, so a request for 100 quietly returns 60 and looks successful.
 - `category_id` must be numeric. An unrecognised category id returns the UNFILTERED result set under a `200`, which looks like a successful filter and is not one. Verify the id before relying on it.
 - `condition: "refurbished"` is eBay's parent condition, not one of its three graded refurbished tiers. Do not present it as a specific grade.
-- There is no "Distance: nearest first" sort. It ranks against the proxy exit rather than the caller's location, so it is deliberately absent. Do not tell the user to use it.
+- There is no "Distance: nearest first" sort. It ranks against the proxy exit rather than the caller's location, so it is deliberately absent. Never recommend it.
 - Sold-listing prices are historical. When quoting them as a market value, say when the sale happened.
 - Always include the listing URL so the user can verify.
 

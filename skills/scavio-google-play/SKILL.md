@@ -106,10 +106,13 @@ At `hl=pt-BR` the title, the description, the install formatting **and the conte
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search - one shelf of ~30 apps, no pagination
 apps = requests.post(f"{BASE}/api/v1/googleplay/search", headers=HEADERS,
@@ -182,7 +185,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 `langchain-scavio` has no Google Play tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -200,7 +203,7 @@ page2 = client.google_play.reviews("com.spotify.music", sort="rating", count=200
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

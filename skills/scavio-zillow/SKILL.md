@@ -108,10 +108,13 @@ Three things Zillow does that the filter table cannot show:
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Homes for sale - use the CITY name, not a ZIP, when filtering
 listings = requests.post(f"{BASE}/api/v1/zillow/search", headers=HEADERS,
@@ -200,7 +203,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -214,7 +217,7 @@ agent = client.zillow.agent_reviews("jane-smith")
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

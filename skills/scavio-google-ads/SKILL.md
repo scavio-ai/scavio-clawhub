@@ -57,7 +57,7 @@ Base URL: `https://api.scavio.dev`. All paths are under `/api/v1/googleads`. Eve
 
 **Look up first.** `/search` and `/creative` are keyed by `advertiser_id`.
 
-1. **Resolve:** call `/googleads/advertisers` with a brand name or a domain. A name query returns two kinds of row - `advertiser` rows with the id, verified name, verification country and total ad count, and `domain` rows carrying a website. A domain-shaped query returns domains only.
+1. **Resolve:** call `/googleads/advertisers` with a brand name or a domain. A name query returns two kinds of row - `advertiser` rows with the id, verified name, verification country and total ad count, and `domain` rows carrying a website. A domain-shaped query returns domains only. A full URL is fine - Google reduces it to the registrable host itself. **Pass `region` for any non-US advertiser:** this endpoint defaults to the United States, so a brand that runs no US ads returns an empty list, which reads like "not found" rather than "wrong country".
 2. **Pull the ads:** call `/googleads/search` with `advertiser_id` **or** `domain`, plus filters.
 3. **Open one creative:** call `/googleads/creative` with the `advertiser_id` **and** `creative_id` **pair**.
 
@@ -79,7 +79,7 @@ Base URL: `https://api.scavio.dev`. All paths are under `/api/v1/googleads`. Eve
 | Parameter | Type | Default | Description |
 |---|---|---|---|
 | `query` | string | required | Brand name or domain (1-200 chars) |
-| `region` | string | -- | ISO alpha-2 (`US`, `GB`, `DE`) or a Google geo criteria id as a string (2-12 chars) |
+| `region` | string | `US` | ISO alpha-2 (`US`, `GB`, `DE`) or a Google geo criteria id as a string (2-12 chars). **Defaults to the United States, not worldwide** - the lookup runs against one country index at a time, so an advertiser who runs no US ads comes back as an empty list rather than an error. Set it to a country the advertiser actually advertises in. |
 | `limit` | integer | `10` | 1-20, **per arm** - advertisers and domains are capped separately, so a name query can return up to twice this many rows |
 
 ### Search (`/search`)
@@ -121,10 +121,13 @@ Google never publishes an exact ad count. The advertiser's headline total arrive
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Resolve the brand to a verified advertiser id - always start here
 who = requests.post(f"{BASE}/api/v1/googleads/advertisers", headers=HEADERS,
@@ -198,7 +201,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 `langchain-scavio` has no Google Ads Transparency tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -218,7 +221,7 @@ creative = client.google_ads.creative("AR16735076323512287233", "CR1234567890")
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

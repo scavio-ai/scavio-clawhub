@@ -88,10 +88,13 @@ Authorization: Bearer $SCAVIO_API_KEY
 ## Example
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search places, focused on Austin
 search = requests.post(f"{BASE}/api/v2/google/maps/search", headers=HEADERS,

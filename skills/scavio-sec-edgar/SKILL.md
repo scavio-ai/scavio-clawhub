@@ -158,10 +158,13 @@ Filers the SEC lists with **no** exchange at all are excluded by **any** `exchan
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Resolve the ticker to a CIK - always start here
 hits = requests.post(f"{BASE}/api/v1/sec/lookup", headers=HEADERS,
@@ -227,7 +230,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 `langchain-scavio` has no SEC EDGAR tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -246,7 +249,7 @@ docs = client.sec.search(query='"material weakness"', form="8-K", sort="newest")
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

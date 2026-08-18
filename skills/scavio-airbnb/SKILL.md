@@ -126,10 +126,13 @@ The `limit` / `offset` names are load-bearing. The underscored `_limit` / `_offs
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search a real date window - min_price/max_price are the WHOLE-STAY total
 found = requests.post(f"{BASE}/api/v1/airbnb/search", headers=HEADERS,
@@ -253,7 +256,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -270,7 +273,7 @@ reviews = client.airbnb.reviews(listing_id, limit=50, offset=0)
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

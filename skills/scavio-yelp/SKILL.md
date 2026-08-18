@@ -110,10 +110,13 @@ Yelp fixes the page size at **10** for both search and reviews.
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Always send location - a location-less search follows the proxy exit
 found = requests.post(f"{BASE}/api/v1/yelp/search", headers=HEADERS,
@@ -219,7 +222,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -235,7 +238,7 @@ more = client.yelp.reviews(business_id=alias, page=2)  # start at 2, never 1
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

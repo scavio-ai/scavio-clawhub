@@ -146,10 +146,13 @@ curl -s https://api.scavio.dev/api/v1/amazon/options
 Search, then price-check the cheapest seller:
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 def call(path, body):
     r = requests.post(f"{BASE}/api/v1/amazon/{path}", headers=HEADERS, json=body)
@@ -437,7 +440,7 @@ Read these carefully before building on them:
 ## LangChain
 
 ```bash
-pip install langchain-scavio
+pip install langchain-scavio==4.0.2
 ```
 
 ```python

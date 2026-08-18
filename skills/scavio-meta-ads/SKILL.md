@@ -116,10 +116,13 @@ To surface them, set `ad_type: political_and_issue_ads`. If the user is asking "
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Keyword search - 30 ads on page 1
 ads = requests.post(f"{BASE}/api/v1/meta-ads/search", headers=HEADERS,
@@ -176,7 +179,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 - Never report `null` spend or reach as zero spend. Meta publishes those figures for political and issue ads only.
 - Do not change filters mid-walk. The cursor already carries them and the new values are ignored; start a fresh walk instead.
 - Stop on `has_next_page: false`, not on a short page.
-- This is **logged-out public data only**. Nothing here touches a login or Meta's token-gated ads-archive API, so do not tell the user they need a Meta developer token.
+- This is **logged-out public data only**. Nothing here touches a login or Meta's token-gated ads-archive API, so never claim a Meta developer token is required.
 - Never fabricate ad copy, page names, run dates, spend figures or disclosures. Only return API data.
 - Ad creative is someone else's copyrighted work. Quote it for analysis; do not present it as the user's own.
 
@@ -197,7 +200,7 @@ The error set here is `400 / 401 / 404 / 429 / 502` - **there is no 503 on this 
 `langchain-scavio` has no Meta Ad Library tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -216,7 +219,7 @@ one = client.meta_ads.ad("1234567890123456")
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

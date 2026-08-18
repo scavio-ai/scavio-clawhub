@@ -162,10 +162,13 @@ Authorization: Bearer $SCAVIO_API_KEY
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Look up a profile
 profile = requests.post(f"{BASE}/api/v1/tiktok/profile", headers=HEADERS,
@@ -302,7 +305,7 @@ tag_vids = requests.post(f"{BASE}/api/v1/tiktok/hashtag/videos", headers=HEADERS
 ## LangChain
 
 ```bash
-pip install langchain-scavio
+pip install langchain-scavio==4.0.2
 ```
 
 ```python

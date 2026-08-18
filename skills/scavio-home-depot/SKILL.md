@@ -95,10 +95,13 @@ Base URL: `https://api.scavio.dev`. Every Home Depot endpoint costs **2 credits*
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search, cheapest first, under $300
 found = requests.post(f"{BASE}/api/v1/homedepot/search", headers=HEADERS,
@@ -191,7 +194,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -205,7 +208,7 @@ reviews = client.home_depot.reviews(item["data"]["item_id"], page=2)
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

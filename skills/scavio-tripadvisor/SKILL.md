@@ -116,10 +116,13 @@ Base URL: `https://api.scavio.dev`. Every Tripadvisor endpoint costs **2 credits
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. ALWAYS START HERE - a name is not an id
 places = requests.post(f"{BASE}/api/v1/tripadvisor/locations", headers=HEADERS,
@@ -218,7 +221,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -237,7 +240,7 @@ more = client.tripadvisor.reviews(location_id=row["location_id"], geo_id=row["ge
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

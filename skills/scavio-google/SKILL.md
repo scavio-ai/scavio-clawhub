@@ -78,11 +78,15 @@ Every request costs 1 credit.
 ## Example
 
 ```python
-import os, requests
+import requests
+
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
 
 response = requests.post(
     "https://api.scavio.dev/api/v2/google",
-    headers={"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"},
+    headers={"Authorization": f"Bearer {API_KEY}"},
     json={"query": "langchain agents tutorial", "gl": "us", "hl": "en"},
 )
 data = response.json()
@@ -137,7 +141,7 @@ The response is a faithful passthrough of the SERP. Depending on the query it ma
 ## LangChain
 
 ```bash
-pip install langchain-scavio
+pip install langchain-scavio==4.0.2
 ```
 
 ```python

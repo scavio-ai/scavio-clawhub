@@ -62,7 +62,7 @@ Every endpoint also accepts a full `capterra.com` URL as `url` instead of an id 
 
 ### Pagination
 
-**Search does not paginate.** Capterra fixes the result set at 20 and `?page=2` returns identical rows, so there is deliberately **no `page` parameter** on `/search`. Do not add one, and do not tell the user there is a second page - refine the query instead.
+**Search does not paginate.** Capterra fixes the result set at 20 and `?page=2` returns identical rows, so there is deliberately **no `page` parameter** on `/search`. Do not add one, and never claim a second page exists - refine the query instead.
 
 **Reviews page with `page`, 25 per page, capped at page 100.** Past page 100 Capterra answers `200` with **page one** and quietly drops the page from the canonical URL, so an over-run looks like a successful call returning duplicate data rather than an error. Stay inside the cap.
 
@@ -110,10 +110,13 @@ So never hand-write a slug for a review call. Pass back the `slug` or the `revie
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search - 20 products, no pagination. Refine the query for different results.
 found = requests.post(f"{BASE}/api/v1/capterra/search", headers=HEADERS,
@@ -180,7 +183,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 `langchain-scavio` has no Capterra tool - use the Scavio SDK directly:
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -196,7 +199,7 @@ more = client.capterra.reviews(url=profile["data"]["reviews_url"], page=2)
 JavaScript / TypeScript:
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```js

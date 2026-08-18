@@ -67,7 +67,7 @@ Base URL: `https://api.scavio.dev`. All paths are under `/api/v1/linkedin`. Cost
 
 ### Retired endpoints
 
-The upstream data provider withdrew five datasets. These paths still exist but always return HTTP **410** with `{"code": "endpoint_retired", "reason": ...}` and are **never billed**. Do not retry them, and do not tell the user the data is temporarily unavailable - it is gone.
+The upstream data provider withdrew five datasets. These paths still exist but always return HTTP **410** with `{"code": "endpoint_retired", "reason": ...}` and are **never billed**. Do not retry them, and never describe the data as temporarily unavailable - it is gone.
 
 | Retired | Closest substitute |
 |---|---|
@@ -155,10 +155,13 @@ Page sizes are 50 posts for the two feeds and 25 listings for job search.
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. A person's profile, with experience and education inline
 person = requests.post(f"{BASE}/api/v1/linkedin/person", headers=HEADERS,
@@ -293,7 +296,7 @@ An experience entry has two shapes. A single role carries `company` plus its own
 `langchain-scavio` has no LinkedIn tool - use the Scavio SDK directly (it handles the auth header, and `next_cursor` is passed straight back as `cursor`):
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python

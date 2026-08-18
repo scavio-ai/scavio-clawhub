@@ -108,10 +108,13 @@ Indeed does not reject a filter value it does not recognise - it **ignores** it 
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Keyword + location, inside a radius Indeed actually honours
 found = requests.post(f"{BASE}/api/v1/indeed/search", headers=HEADERS,
@@ -205,7 +208,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## SDKs
 
 ```bash
-pip install scavio
+pip install scavio==0.15.0
 ```
 
 ```python
@@ -220,7 +223,7 @@ reviews = client.indeed.company_reviews(job["data"]["company_slug"], page=1)
 ```
 
 ```bash
-npm install scavio
+npm install scavio@0.15.0
 ```
 
 ```javascript

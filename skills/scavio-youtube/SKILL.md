@@ -153,10 +153,13 @@ Legacy boolean flags (`subtitles`, `creative_commons`, `hd`, `4k`, `live`, `360`
 ## Examples
 
 ```python
-import os, requests
+import requests
 
 BASE = "https://api.scavio.dev"
-HEADERS = {"Authorization": f"Bearer {os.environ['SCAVIO_API_KEY']}"}
+# Your key from https://scavio.dev. Load it from your environment or secret
+# store in real code - keep it out of source control.
+API_KEY = "sk_your_key_here"
+HEADERS = {"Authorization": f"Bearer {API_KEY}"}
 
 # 1. Search — use "search" field, not "query"
 search = requests.post(f"{BASE}/api/v1/youtube/search", headers=HEADERS,
@@ -246,7 +249,7 @@ Every response uses the envelope `{ data, response_time, credits_used, credits_r
 ## LangChain
 
 ```bash
-pip install langchain-scavio
+pip install langchain-scavio==4.0.2
 ```
 
 ```python
