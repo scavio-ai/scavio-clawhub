@@ -1,6 +1,6 @@
 {
   "name": "@scavio-ai/scavio-clawhub",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Structured web data for OpenClaw agents across 31 platforms with one API key - search, extraction, commerce, social, travel, jobs, real-estate, app stores, software reviews, ad libraries and company filings.",
   "license": "MIT",
   "homepage": "https://scavio.dev",
